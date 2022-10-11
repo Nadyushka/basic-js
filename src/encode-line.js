@@ -11,47 +11,49 @@ const { NotImplementedError } = require('../extensions/index.js');
  *
  */
 function encodeLine(str) {
-	let array = str.split('');
-	let value = [];
-	let final = '';
 
-	value.push(array[0])
+if (!str) {
+	return ''
+}
+
+	let array = str;
+	let uniqueValueArray = [];
+	uniqueValueArray.push(array[0])
 
 	for (let i = 1; i < array.length; i++) {
 		if (array[i] !== array[i - 1]) {
-			value.push(array[i])
+			uniqueValueArray.push(array[i])
 		}
 	}
 
-	for (let j = 0; j < value.length; j++) {
-		let count = 1;
-		let currant = value[j];
+	let arrayTwo = [];
 
+	for (let i = 0; i < uniqueValueArray.length; i++) {
+		arrayTwo.push([])
+	}
 
-
-		for (let k = 0; array[k] === currant; k++) {
-
-			if (currant === array[k]) {
-				count++;
-			}
-			array = array.slice(count);
-		}
-
-		if (j === 0 && count === 1) {
-			final += currant;
-		} else if (count === 1) {
-			final += currant;
-		} else {
-			if (j === 0) {
-				final += count - 1 + currant;
+	for (let i = 0; i < uniqueValueArray.length; i++) {
+		for (let n = 0; n < str.length; n++) {
+			if (uniqueValueArray[i] === str[n]) {
+				arrayTwo[i].push(str[n])
 			} else {
-				final += count + currant;
+				str = str.slice(n)
+				break
 			}
 		}
 	}
 
-	return final;
+	let result = '';
 
+	for (let i = 0; i < arrayTwo.length; i++) {
+		if (arrayTwo[i].length !== 1 ) {
+		result += arrayTwo[i].length + arrayTwo[i][0]
+		} else {
+			result +=  arrayTwo[i][0]
+		}
+	}
+
+	return result;
 }
 
 module.exports = {
