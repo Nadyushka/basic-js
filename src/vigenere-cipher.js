@@ -22,13 +22,8 @@ const { NotImplementedError } = require('../extensions/index.js');
 class VigenereCipheringMachine {
 
 	constructor(value) {
-		if (!value) {
-			this.value = true;
-		} else {
-			this.value = false;
-		}
+		this.value = value;
 	}
-
 
 	decrypt(word, key) {
 
@@ -58,7 +53,13 @@ class VigenereCipheringMachine {
 				}
 			}
 		}
-		return result;
+
+		if (this.value === false) {
+			return result.split('').reverse().join('');
+		} else {
+			return result
+		}
+
 	}
 
 	encrypt(word, key) {
@@ -88,7 +89,11 @@ class VigenereCipheringMachine {
 
 		}
 
-		return result;
+		if (this.value === false) {
+			return result.split('').reverse().join('');
+		} else {
+			return result
+		}
 
 	}
 
